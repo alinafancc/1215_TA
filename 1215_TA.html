@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="container">
+    <script>
+        function add(a, b) {
+            return a + b;
+        }
+
+        function subtract(a, b) {
+            return a - b;
+        }
+
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        function divide(a, b) {
+            if (b !== 0) {
+                return a / b;
+            } else {
+                throw new Error("Cannot divide by zero");
+            }
+        }
+
+        function getUserInput() {
+            var num1 = parseFloat(prompt("Enter the first number:"));
+
+            if (isNaN(num1)) {
+                alert("Please enter a valid number");
+                return getUserInput();
+            }
+
+            var num2;
+            while (true) {
+                num2 = parseFloat(prompt("Enter the second number:"));
+
+                if (!isNaN(num2)) {
+                    break;
+                } else {
+                    alert("Please enter a valid number");
+                }
+            }
+
+            var operation;
+            while (true) {
+                operation = prompt("Choose an operation (+, -, *, /):");
+
+                if (['+', '-', '*', '/'].includes(operation)) {
+                    break;
+                } else {
+                    alert("Please enter a valid operation");
+                }
+            }
+
+            switch (operation) {
+                case '+':
+                    return add(num1, num2);
+                case '-':
+                    return subtract(num1, num2);
+                case '*':
+                    return multiply(num1, num2);
+                case '/':
+                    try {
+                        return divide(num1, num2);
+                    } catch (error) {
+                        alert(error.message);
+                        return getUserInput();
+                    }
+            }
+        }
+
+        while (true) {
+            var result = getUserInput();
+            alert("Result: " + result);
+
+            var continueCalculation = prompt("Do you want to perform another calculation? (yes/no)");
+
+            if (continueCalculation.toLowerCase() !== 'yes') {
+                break;
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>
